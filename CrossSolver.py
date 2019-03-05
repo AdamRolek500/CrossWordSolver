@@ -77,48 +77,52 @@ def check_diag(matrix, word):
     cols = len(matrix[0])
     max_slices = rows + cols - 1
     for total in range(max_slices):
-        string= ""
+        string = ""
         z1 = 0 if total < cols else total - cols + 1
         z2 = 0 if total < rows else total - rows + 1
         for j in range(total - z2, z1 - 1, -1):
-            string+= matrix[j][total - j]
-            if word in string:
+            string += matrix[j][total - j].letter
+            if word in string or word[::-1] in string:
                 print("Word Found!")
                 x = j
                 y = total - j
                 for z in range(len(word)):
-                    matrix[x][y].add_match_counter()
-                    x + +
-                    y - -
+                    matrix[x][y].add_match_count()
+                    x += 1
+                    y -= 1
+                return
     for total in range(max_slices):
-        string+= ""
+        string = ""
         z1 = 0 if total < cols else total - cols + 1
         z2 = 0 if total < rows else total - rows + 1
         for j in range(total - z2, z1 - 1, -1):
-            string+= matrix[rows - j - 1][total - j]
-            if word in string:
+            string += matrix[rows - j - 1][total - j].letter
+            if word in string or word[::-1] in string:
                 print("Word Found!")
                 x = rows - j - 1
                 y = total - j
                 for z in range(len(word)):
-                    matrix[x][y].add_match_counter()
-                    x - -
-                    y - -
-        print
-        s
+                    matrix[x][y].add_match_count()
+                    x -= 1
+                    y -= 1
+                return
 
 
 def main():
-    words = ["edg", "cgc", "bcd"]
-    matrix = [[Letter('a'), Letter('a'), Letter('a'), Letter('a'), Letter('a')],
-              [Letter('b'), Letter('b'), Letter('b'), Letter('b'), Letter('b')],
-              [Letter('c'), Letter('c'), Letter('c'), Letter('g'), Letter('c')],
-              [Letter('d'), Letter('d'), Letter('d'), Letter('d'), Letter('d')],
-              [Letter('e'), Letter('e'), Letter('e'), Letter('e'), Letter('e')]]
-    # for word in words:
-    #     check_rows(matrix, word)
-    #     check_cols(matrix, word)
-    check_diag(matrix, words)
+    words = ["black", "blue", "brown", "green", "orange", "pink", "red", "white", "yellow"]
+    matrix = [[Letter('b'), Letter('x'), Letter('h'), Letter('p'), Letter('b'), Letter('l'), Letter('a'), Letter('c'), Letter('k')],
+              [Letter('b'), Letter('g'), Letter('o'), Letter('i'), Letter('e'), Letter('f'), Letter('w'), Letter('f'), Letter('i')],
+              [Letter('n'), Letter('y'), Letter('q'), Letter('n'), Letter('p'), Letter('d'), Letter('h'), Letter('a'), Letter('q')],
+              [Letter('q'), Letter('g'), Letter('t'), Letter('k'), Letter('g'), Letter('r'), Letter('e'), Letter('e'), Letter('n')],
+              [Letter('w'), Letter('h'), Letter('i'), Letter('t'), Letter('e'), Letter('b'), Letter('l'), Letter('u'), Letter('e')],
+              [Letter('o'), Letter('r'), Letter('a'), Letter('n'), Letter('g'), Letter('e'), Letter('g'), Letter('u'), Letter('x')],
+              [Letter('u'), Letter('b'), Letter('l'), Letter('y'), Letter('e'), Letter('l'), Letter('l'), Letter('o'), Letter('w')],
+              [Letter('k'), Letter('x'), Letter('m'), Letter('g'), Letter('z'), Letter('p'), Letter('d'), Letter('r'), Letter('r')],
+              [Letter('b'), Letter('r'), Letter('o'), Letter('w'), Letter('n'), Letter('t'), Letter('r'), Letter('e'), Letter('d')]]
+    for word in words:
+        check_rows(matrix, word)
+        check_cols(matrix, word)
+        check_diag(matrix, word)
     print_matrix(matrix)
 
 
