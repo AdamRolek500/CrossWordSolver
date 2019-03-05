@@ -2,6 +2,7 @@
 
 """
 
+
 from termcolor import colored
 
 
@@ -71,6 +72,42 @@ def print_matrix(matrix):
         print()
 
 
+def check_diag(matrix, word):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    max_slices = rows + cols - 1
+    for total in range(max_slices):
+        string= ""
+        z1 = 0 if total < cols else total - cols + 1
+        z2 = 0 if total < rows else total - rows + 1
+        for j in range(total - z2, z1 - 1, -1):
+            string+= matrix[j][total - j]
+            if word in string:
+                print("Word Found!")
+                x = j
+                y = total - j
+                for z in range(len(word)):
+                    matrix[x][y].add_match_counter()
+                    x + +
+                    y - -
+    for total in range(max_slices):
+        string+= ""
+        z1 = 0 if total < cols else total - cols + 1
+        z2 = 0 if total < rows else total - rows + 1
+        for j in range(total - z2, z1 - 1, -1):
+            string+= matrix[rows - j - 1][total - j]
+            if word in string:
+                print("Word Found!")
+                x = rows - j - 1
+                y = total - j
+                for z in range(len(word)):
+                    matrix[x][y].add_match_counter()
+                    x - -
+                    y - -
+        print
+        s
+
+
 def main():
     words = ["edg", "cgc", "bcd"]
     matrix = [[Letter('a'), Letter('a'), Letter('a'), Letter('a'), Letter('a')],
@@ -78,9 +115,10 @@ def main():
               [Letter('c'), Letter('c'), Letter('c'), Letter('g'), Letter('c')],
               [Letter('d'), Letter('d'), Letter('d'), Letter('d'), Letter('d')],
               [Letter('e'), Letter('e'), Letter('e'), Letter('e'), Letter('e')]]
-    for word in words:
-        check_rows(matrix, word)
-        check_cols(matrix, word)
+    # for word in words:
+    #     check_rows(matrix, word)
+    #     check_cols(matrix, word)
+    check_diag(matrix, words)
     print_matrix(matrix)
 
 
