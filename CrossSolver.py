@@ -57,21 +57,6 @@ def check_cols(matrix, word):
         col = ""
 
 
-def print_matrix(matrix):
-    for x in range(len(matrix)):
-        for y in range(len(matrix[x])):
-            if matrix[x][y].match_count == 0:
-                print(matrix[x][y].letter, end="")
-            else:
-                if matrix[x][y].match_count == 1:
-                    print(colored(matrix[x][y].letter, "red"), end="")
-                elif matrix[x][y].match_count == 2:
-                    print(colored(matrix[x][y].letter, "blue"), end="")
-                else:
-                    print(colored(matrix[x][y].letter, "yellow"), end="")
-        print()
-
-
 def check_diag(matrix, word):
     rows = len(matrix)
     cols = len(matrix[0])
@@ -106,6 +91,21 @@ def check_diag(matrix, word):
                     x -= 1
                     y -= 1
                 return
+
+
+def print_matrix(matrix):
+    for x in range(len(matrix)):
+        for y in range(len(matrix[x])):
+            if matrix[x][y].match_count == 0:
+                print(matrix[x][y].letter, end="")
+            else:
+                if matrix[x][y].match_count == 1:
+                    print(colored(matrix[x][y].letter, "red"), end="")
+                elif matrix[x][y].match_count == 2:
+                    print(colored(matrix[x][y].letter, "blue"), end="")
+                else:
+                    print(colored(matrix[x][y].letter, "yellow"), end="")
+        print()
 
 
 def main():
